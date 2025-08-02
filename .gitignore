@@ -4,6 +4,7 @@ node_modules/
 # Build output
 dist/
 *.js
+!*.config.js
 *.js.map
 
 # IDE and editor files
