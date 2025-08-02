@@ -8,8 +8,8 @@ export type ModelRate = {
 // USD per 1M tokens
 const RATES: Record<string, ModelRate> = {
   '*opus*4*': { in: 15, out: 75, cacheCreate: 18.75, cacheRead: 1.5 },
-  '*sonnet*3*': { in: 3, out: 15, cacheCreate: 3.75, cacheRead: 0.3 },
-  '*haiku*': { in: 0.25, out: 1.25, cacheCreate: 0.31, cacheRead: 0.025 }
+  '*sonnet*4*': { in: 3, out: 15, cacheCreate: 3.75, cacheRead: 0.3 },
+  '*haiku*': { in: 0.8, out: 4, cacheCreate: 1.0, cacheRead: 0.08 }
 }
 
 export function rateFor(model: string): ModelRate {
