@@ -15,8 +15,13 @@ const loadingMessages = [
   'debt-accumulating...'
 ]
 
+// Random emojis that can be paired with any message
+const emojis = ['💸', '🌲', '🔥', '🏦', '🥵', '🏃', '📞', '💨', '💥', '📉']
+
 const getRandomLoadingMessage = () => {
-  return loadingMessages[Math.floor(Math.random() * loadingMessages.length)]
+  const msg = loadingMessages[Math.floor(Math.random() * loadingMessages.length)]
+  const emoji = emojis[Math.floor(Math.random() * emojis.length)]
+  return `${emoji} ${msg}`
 }
 
 export function buildMenu(t: {
@@ -40,7 +45,7 @@ export function buildMenu(t: {
           ? `🔥  Welcome to the 5% Club!`
           : `📈  ${(100 - pctNum).toFixed(1)}% away from 5% Club`
     },
-    { label: `⏳  ${getRandomLoadingMessage()}`, enabled: false },
+    { label: getRandomLoadingMessage(), enabled: false },
     { type: 'separator' as const },
 
     { label: `📥  Input: ${t.input.toLocaleString()}` },
