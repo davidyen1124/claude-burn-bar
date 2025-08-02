@@ -30,14 +30,13 @@ export function buildMenu(t: {
   const stars = '★'.repeat(Math.min(4, Math.floor(t.usd / 50) + 1)).padEnd(4, '☆')
   const fact = ecoFacts(t.tokens)
 
-  const topSpend = 500 // stub percentile curve
-  const pctNum = Math.min(99.9, (t.usd / topSpend) * 100)
+  const pctNum = Math.min(100, t.usd) // Progress toward $100 5% Club threshold
 
   const items = [
     { label: `💰  Today: $${t.usd.toFixed(2)}   ${stars}` },
     {
       label:
-        t.usd > 100
+        t.usd >= 100
           ? `🔥  Welcome to the 5% Club!`
           : `📈  ${(100 - pctNum).toFixed(1)}% away from 5% Club`
     },
