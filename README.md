@@ -24,6 +24,7 @@ That's when I realized: **I needed to track exactly how much money I was setting
 ## 💸 What Nobody Tells You About Claude Addiction
 
 Did you know:
+
 - 🔥 One Claude query = 0.0003 trees murdered
 - 💧 Every token you generate evaporates someone's drinking water
 - 📱 Your daily Claude usage could charge 13,000 iPhones (or 1 iPhone 13,000 times)
@@ -34,25 +35,32 @@ Did you know:
 ## 🎯 10 SHOCKING Features That Will Make You Question Your Life Choices
 
 ### 1. THE MONEY COUNTER OF DOOM 💀
+
 Watch your net worth decrease IN REAL TIME! Nothing says "productivity" like seeing "$247.83" in your menubar and knowing that's just TODAY.
 
 ### 2. THE GUILT CONVERTER 3000™️
+
 Instantly converts your API usage into:
+
 - 🌳 Dead trees (RIP)
 - 💧 Evaporated water (someone's thirsty)
 - 🔋 iPhone charges (could've been mining crypto instead)
 - 💡 60W lightbulb hours (retro!)
 
 ### 3. THE 5% CLUB TRACKER 🏆
+
 Shows if you've reached the elite "5% Club" of top spenders, or how painfully close you are to joining.
 
 ### 4. ASCII ART THAT SLAPS
+
 ```
 ★★★☆ = You're almost at "sell a kidney" level!
 ```
 
 ### 5. SARCASTIC STATUS MESSAGES
+
 A random passive-aggressive message appears in every menu refresh:
+
 - "wallet-melting..."
 - "tree-murdering..."
 - "gpu-liquefying..."
@@ -72,22 +80,28 @@ Because even your menubar should judge you.
 
 ## 🚀 How To Join The 5% Club (DOCTORS HATE THIS!)
 
-### Step 1: Install This Bad Boy
+### Quick Start
+
 ```bash
 git clone https://github.com/yourusername/claude-burn-bar
 cd claude-burn-bar
-pnpm install  # npm is for boomers
-pnpm dev
+npm install
+npm run build
+open dist/main.js  # or use electron . to run directly
 ```
 
 ### Step 2: Watch The Numbers Go Up
+
 ### Step 3: Cry
+
 ### Step 4: Ask Claude How To Feel Better
+
 ### Step 5: Return To Step 2
 
 ## 🧪 The "Science" Behind The Magic
 
 We use GRADIENT DESCENT™️ to calculate your ecological footprint:
+
 - **1 token = 0.0000006 kWh** (source: my cousin who works at a data center)
 - **1 kWh = 1.8L of water** (it's for cooling the GPUs you're melting)
 - **1 tree absorbs 10kg CO₂/year** (they're trying their best ok?)
@@ -115,6 +129,7 @@ We use GRADIENT DESCENT™️ to calculate your ecological footprint:
 - **Your JSONL files**: We're in your computer, reading your shame
 - **Math**: The bad kind
 - **Emojis**: The good kind
+- **Security Theatre**: We have more security code than actual app logic (seriously, check the repo)
 
 ## 🚨 BREAKING: Anthropic's Response
 
@@ -151,11 +166,11 @@ This app's calculations are about as accurate as your New Year's resolutions. Si
 
 ### 💭 Final Thoughts From The Creator
 
-*"I started this project to track my Claude usage. I ended up questioning the meaning of existence and whether CSS is worth destroying the planet for. Anyway, here's a menubar app."*
+_"I started this project to track my Claude usage. I ended up questioning the meaning of existence and whether CSS is worth destroying the planet for. Anyway, here's a menubar app."_
 
-**⭐ STAR THIS REPO = 1 TREE PLANTED*** 
+**⭐ STAR THIS REPO = 1 TREE PLANTED\***
 
-*\*No trees will actually be planted*
+_\*No trees will actually be planted_
 
 ---
 
@@ -167,7 +182,7 @@ This app's calculations are about as accurate as your New Year's resolutions. Si
 ### 👇 DEVELOPERS WHO INSTALLED THIS APP ALSO RUINED THEIR FINANCES WITH:
 
 - 🎰 Crypto Trading Bots
-- 🏠 SF Rent Calculators  
+- 🏠 SF Rent Calculators
 - 🚁 "Uber for X" Ideas
 - 🤖 Other AI Wrappers
 

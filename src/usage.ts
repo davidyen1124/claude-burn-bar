@@ -22,29 +22,21 @@ export async function getTodaysTotals(): Promise<Totals> {
   const start = dayjs().startOf('day')
   const end = dayjs().endOf('day')
 
-  // Get paths like ccusage does
+  // Discover Claude log directories
   const homedir = os.homedir()
-  const xdgConfig = process.env.XDG_CONFIG_HOME || path.join(homedir, '.config')
+  const configHome = process.env.XDG_CONFIG_HOME || path.join(homedir, '.config')
 
-  const claudePaths = [
-    path.join(xdgConfig, 'claude', 'projects'),
+  const logDirectories = [
+    path.join(configHome, 'claude', 'projects'),
     path.join(homedir, '.claude', 'projects')
   ]
 
-  // Support CLAUDE_CONFIG_DIR environment variable
-  if (process.env.CLAUDE_CONFIG_DIR) {
-    const envPaths = process.env.CLAUDE_CONFIG_DIR.split(',').map((p) =>
-      path.join(p.trim(), 'projects')
-    )
-    claudePaths.push(...envPaths)
-  }
-
   // Find all JSONL files in all Claude paths
   const allFiles: string[] = []
-  for (const claudePath of claudePaths) {
+  for (const logDir of logDirectories) {
     try {
       const files = await fg('**/*.jsonl', {
-        cwd: claudePath,
+        cwd: logDir,
         absolute: true
       })
       allFiles.push(...files)

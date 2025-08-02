@@ -1,0 +1,40 @@
+name: 🧹 Lint (Cheaper Than Claude Code Review)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: 💅 Make Code Pretty (Unlike Your Spending Habits)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏃 Checkout (Faster Than Your Bank Account Draining)
+        uses: actions/checkout@v4
+
+      - name: 🤖 Setup Node.js (Still Free, Unlike You Know What)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 💊 Install Dependencies (Legal and Affordable)
+        run: |
+          echo "Installing packages that cost less than 1 Claude query..."
+          npm ci
+          echo "Success! Saved $0.02 by not asking Claude to fix npm install"
+
+      - name: 🔍 Run Lint (Finding Problems For Free)
+        run: |
+          echo "Checking if your code is as messy as your API usage..."
+          npm run lint || (echo "❌ Found issues! Ask Claude to fix them for only $5.99" && exit 1)
+          echo "✅ Code is cleaner than your conscience!"
+
+      - name: 📐 Check Formatting (Making Code Pretty Won't Fix Your Bill)
+        run: |
+          echo "Ensuring consistent formatting (unlike your spending)..."
+          npm run format:check || (echo "❌ Format issues detected! Your code spacing is as inconsistent as your financial planning" && exit 1)
+          echo "✅ Format check passed! At least something in your life is organized"

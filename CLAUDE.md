@@ -12,7 +12,7 @@ Claude Burn Bar is an Electron-based macOS menubar application that tracks Claud
 
 - `npm run dev` - Start the app in development mode with hot reload
 - `npm run build` - Compile TypeScript to JavaScript
-- `npm run package` - Build distributable app using electron-builder
+- `npm run package` - Build distributable app as ZIP using electron-builder
 - `npm run lint` - Run ESLint with TypeScript configuration
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting without applying changes

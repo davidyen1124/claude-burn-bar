@@ -1,6 +1,6 @@
 {
   "name": "claude-burn-bar",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "Claude Burn Bar - A productivity tracking application",
   "author": "David",
   "main": "dist/main.js",
@@ -23,17 +23,11 @@
   "devDependencies": {
     "electron": "^37.2.5",
     "@eslint/js": "^9.18.0",
-    "@semantic-release/commit-analyzer": "^13.0.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.3.5",
-    "@semantic-release/npm": "^12.0.1",
-    "@semantic-release/release-notes-generator": "^14.0.1",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "electron-builder": "^26.0.12",
     "eslint": "^9.18.0",
     "prettier": "^3.4.2",
-    "semantic-release": "^24.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
@@ -50,19 +44,14 @@
     ],
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "assets/Icon.png"
-    },
-    "dmg": {
-      "contents": [
+      "icon": "assets/Icon.png",
+      "target": [
         {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ]
     }

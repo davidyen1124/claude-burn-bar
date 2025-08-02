@@ -1,4 +1,4 @@
-import { app, Tray, nativeImage, protocol, net } from 'electron'
+import { app, Tray, nativeImage, protocol, net, session } from 'electron'
 import { getTodaysTotals } from './usage.js'
 import { buildMenu } from './menu.js'
 import path from 'node:path'
@@ -15,16 +15,53 @@ app.on('web-contents-created', (_, contents) => {
   contents.on('will-navigate', (event) => {
     event.preventDefault()
   })
+
+  // Additional security: prevent frame navigation
+  contents.on('will-frame-navigate', (event) => {
+    event.preventDefault()
+  })
+
+  // Security: Disable DevTools in production
+  if (app.isPackaged) {
+    contents.on('devtools-opened', () => {
+      contents.closeDevTools()
+    })
+  }
 })
 
 let tray: Tray
 
 app.whenReady().then(async () => {
-  // Security: Register protocol to serve local files safely
+  // Security: Deny all permission requests by default
+  session.defaultSession.setPermissionRequestHandler((_, __, callback) => {
+    // Deny all permissions - menubar app doesn't need any
+    callback(false)
+  })
+
+  // Security: Implement Content Security Policy for any web content
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': [
+          "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'"
+        ]
+      }
+    })
+  })
+
+  // Security: Register protocol to serve local files safely with path traversal protection
   protocol.handle('app', (request) => {
     const url = request.url.substring(6)
-    const filePath = path.normalize(`${__dirname}/${url}`)
-    return net.fetch(pathToFileURL(filePath).href)
+    const normalizedPath = path.normalize(url)
+
+    // Prevent path traversal attacks
+    const resolvedPath = path.resolve(__dirname, normalizedPath)
+    if (!resolvedPath.startsWith(__dirname)) {
+      return new Response('Forbidden', { status: 403 })
+    }
+
+    return net.fetch(pathToFileURL(resolvedPath).href)
   })
   // Create tray without icon first to test
   // On macOS, we can create a tray with just text
