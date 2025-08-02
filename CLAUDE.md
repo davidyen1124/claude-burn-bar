@@ -12,15 +12,12 @@ Claude Burn Bar is an Electron-based macOS menubar application that tracks Claud
 
 - `npm run dev` - Start the app in development mode with hot reload
 - `npm run build` - Compile TypeScript to JavaScript
-- `npm run package` - Build distributable app as ZIP using electron-builder
+- `npm run clean` - Remove the dist directory
+- `npm run typecheck` - Type check TypeScript without emitting files
+- `npm run package` - Build distributable app to release/ directory using electron-builder
 - `npm run lint` - Run ESLint with TypeScript configuration
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting without applying changes
-
-### Testing
-
-- `npm test` - Run Jest tests (watches for changes)
-- `npm run test:ci` - Run tests once without watch mode
 
 ## Architecture
 
@@ -46,12 +43,13 @@ Claude Burn Bar is an Electron-based macOS menubar application that tracks Claud
    - Implements "5% Club" milestone tracking
    - Handles environmental impact display
 
-5. **src/utils.ts** - Shared utilities
-   - Date formatting and relative time calculations
-   - Token-to-word conversion helpers
+5. **src/fun-metrics.ts** - Environmental impact calculations
+   - Converts token usage to environmental metrics (trees, water, energy)
+   - Provides educational comparisons for resource consumption
 
-6. **src/types.ts** - TypeScript type definitions
-   - Interfaces for usage data, pricing, and menu items
+6. **src/security.ts** - Electron security utilities
+   - IPC sender validation to prevent unauthorized communication
+   - Secure IPC handler wrapper with origin allowlisting
 
 ### Data Flow
 
@@ -76,6 +74,6 @@ Claude Burn Bar is an Electron-based macOS menubar application that tracks Claud
 ## Important Patterns
 
 - All file paths use absolute paths, no relative imports
-- Environmental impact calculations use humorous but educational metrics
+- Environmental impact calculations use educational metrics via fun-metrics.ts
 - Menu items use Electron's role system for standard actions (quit, about)
 - Date handling uses dayjs for consistent formatting
