@@ -75,7 +75,7 @@ export async function getTodaysTotals(): Promise<Totals> {
           // Otherwise calculate from tokens
           const model = entry.message?.model
           if (model) {
-            const rate = rateFor(model)
+            const rate = await rateFor(model)
             const usage = entry.message.usage
             const cost =
               ((usage.input_tokens || 0) * rate.in +
