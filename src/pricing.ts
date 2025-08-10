@@ -85,10 +85,10 @@ class PricingFetcher {
     }
 
     try {
-      console.log('Fetching latest model pricing from LiteLLM...')
+      console.warn('Fetching latest model pricing from LiteLLM...')
       this.cachedPricing = await this.fetchPricingFromLiteLLM()
       this.lastFetchTime = now
-      console.log(`Loaded pricing for ${this.cachedPricing.size} models`)
+      console.warn(`Loaded pricing for ${this.cachedPricing.size} models`)
       return this.cachedPricing
     } catch (error) {
       console.warn('Falling back to static pricing due to fetch error:', error)
