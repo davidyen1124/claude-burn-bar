@@ -12,7 +12,8 @@ interface LiteLLMPricing {
   cache_read_input_token_cost?: number
 }
 
-const LITELLM_PRICING_URL = 'https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json'
+const LITELLM_PRICING_URL =
+  'https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json'
 
 // Fallback pricing for when network is unavailable (current rates + Opus 4.1)
 const FALLBACK_RATES: Record<string, ModelRate> = {
@@ -47,20 +48,22 @@ class PricingFetcher {
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
-      
-      const data = await response.json() as Record<string, unknown>
+
+      const data = (await response.json()) as Record<string, unknown>
       const pricing = new Map<string, ModelRate>()
-      
+
       for (const [modelName, modelData] of Object.entries(data)) {
         if (typeof modelData === 'object' && modelData !== null) {
           const litellmPricing = modelData as LiteLLMPricing
-          if (litellmPricing.input_cost_per_token !== undefined || 
-              litellmPricing.output_cost_per_token !== undefined) {
+          if (
+            litellmPricing.input_cost_per_token !== undefined ||
+            litellmPricing.output_cost_per_token !== undefined
+          ) {
             pricing.set(modelName, this.convertLiteLLMToModelRate(litellmPricing))
           }
         }
       }
-      
+
       return pricing
     } catch (error) {
       console.warn('Failed to fetch pricing from LiteLLM:', error)
@@ -79,8 +82,8 @@ class PricingFetcher {
 
   private async ensurePricingLoaded(): Promise<Map<string, ModelRate>> {
     const now = Date.now()
-    
-    if (this.cachedPricing && (now - this.lastFetchTime) < this.CACHE_DURATION) {
+
+    if (this.cachedPricing && now - this.lastFetchTime < this.CACHE_DURATION) {
       return this.cachedPricing
     }
 
@@ -103,31 +106,30 @@ class PricingFetcher {
   async getModelRate(model: string): Promise<ModelRate> {
     try {
       const pricing = await this.ensurePricingLoaded()
-      
+
       const exactMatch = pricing.get(model)
       if (exactMatch) return exactMatch
-      
+
       const variations = [
         model,
         `claude-${model}`,
         `claude-3-${model}`,
         `claude-3-5-${model}`,
-        model.replace('claude-', ''),
+        model.replace('claude-', '')
       ]
-      
+
       for (const variant of variations) {
         const match = pricing.get(variant)
         if (match) return match
       }
-      
+
       const lowerModel = model.toLowerCase()
       for (const [key, value] of pricing) {
-        if (key.toLowerCase().includes(lowerModel) || 
-            lowerModel.includes(key.toLowerCase())) {
+        if (key.toLowerCase().includes(lowerModel) || lowerModel.includes(key.toLowerCase())) {
           return value
         }
       }
-      
+
       return this.getFallbackRate(model)
     } catch (error) {
       console.warn('Error getting model rate, using fallback:', error)
