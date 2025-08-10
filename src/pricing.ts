@@ -12,9 +12,15 @@ const RATES: Record<string, ModelRate> = {
   '*haiku*': { in: 0.8, out: 4, cacheCreate: 1.0, cacheRead: 0.08 }
 }
 
+const COMPILED_PATTERNS: Array<{ pattern: RegExp; rate: ModelRate }> = [
+  { pattern: /.*opus.*4.*/, rate: RATES['*opus*4*'] },
+  { pattern: /.*sonnet.*4.*/, rate: RATES['*sonnet*4*'] },
+  { pattern: /.*haiku.*/, rate: RATES['*haiku*'] }
+]
+
 export function rateFor(model: string): ModelRate {
-  for (const [glob, rate] of Object.entries(RATES)) {
-    if (new RegExp(glob.replace(/\*/g, '.*')).test(model)) return rate
+  for (const { pattern, rate } of COMPILED_PATTERNS) {
+    if (pattern.test(model)) return rate
   }
 
   // Fallback to opus rates if no match
